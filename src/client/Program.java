@@ -19,7 +19,7 @@ public class Program {
 		int port = Integer.parseInt(ResourceBundle.getBundle("resources").getString("port"));
 		String host = ResourceBundle.getBundle("resources").getString("host");
 		try (Socket clientSocket = new Socket(host, port)) {
-			System.out.println("Connected to server!");
+			System.out.println("Conectat la server!");
 			InetSocketAddress address = (InetSocketAddress) clientSocket.getLocalSocketAddress();
 			System.out.println("ID-ul dumneavoastra unic este " + address.getPort());
 			BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));

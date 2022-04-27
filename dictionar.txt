@@ -1,3 +1,6 @@
 autobuz 200 62172
 camion 300 54888
 salam 1000 54888
+sunca 29 64118
+masina 20 59992
+ceva 2 59992

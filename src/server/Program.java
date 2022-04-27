@@ -10,7 +10,7 @@ public class Program {
 		int port = Integer.parseInt(ResourceBundle.getBundle("resources").getString("port"));
 
 		try (Server server = new Server(port)) {
-			System.out.println(String.format("Server started on port %d. Type 'exit' to close", port));
+			System.out.println(String.format("Server-ul a pornit pe portul %d. Scrieti 'exit' pentru a-l inchide.", port));
 			try (Scanner scanner = new Scanner(System.in)) {
 				String command = scanner.nextLine();
 				if (command == null || "exit".equals(command)) {

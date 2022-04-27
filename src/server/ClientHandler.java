@@ -29,9 +29,10 @@ public class ClientHandler implements Runnable {
 			try {
 				InetSocketAddress address = (InetSocketAddress) clientSocket.getRemoteSocketAddress();
 				String command = reader.readLine().toLowerCase();
+				String[] valoriCommand = command.split(" ");
 				if ("exit".equals(command)) {
 					clientSocket.close();
-				} else if (command.contains("add")) {
+				} else if ("add".equals(valoriCommand[0])) {
 					Boolean isValid = true;
 					String[] valori = command.split(" ");
 					BufferedReader bufferedReader = null;
@@ -42,7 +43,8 @@ public class ClientHandler implements Runnable {
 
 						String line;
 						while ((line = bufferedReader.readLine()) != null) {
-							if (line.contains(valori[2])) {
+							String[] valoriLinie = line.split(" ");
+							if (Integer.parseInt(valoriLinie[1]) == Integer.parseInt(valori[2])) {
 								isValid = false;
 								writer.println("Nu puteti adauga acest string deoarece exista aceasta cheie");
 								writer.flush();
@@ -75,7 +77,7 @@ public class ClientHandler implements Runnable {
 						writer.flush();
 					}
 
-				} else if (command.contains("search")) {
+				} else if ("search".equals(valoriCommand[0])) {
 					String[] valoriComanda = command.split(" ");
 					BufferedReader bufferedReader = null;
 					Boolean wasFound = false;
@@ -110,7 +112,7 @@ public class ClientHandler implements Runnable {
 								e.printStackTrace();
 							}
 					}
-				} else if (command.contains("delete")) {
+				} else if ("delete".equals(valoriCommand[0])) {
 					String[] valoriComanda = command.split(" ");
 					BufferedReader bufferedReader = null;
 					Boolean wasFound = false;
