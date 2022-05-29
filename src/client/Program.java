@@ -24,34 +24,40 @@ public class Program {
 			System.out.println("ID-ul dumneavoastra unic este " + address.getPort());
 			BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 			PrintWriter writer = new PrintWriter(clientSocket.getOutputStream());
-			
+
 			BufferedReader bufferedReader = null;
 			try {
 				FileInputStream file = new FileInputStream("dictionar.txt");
 				InputStreamReader inputStreamReader = new InputStreamReader(file);
 				bufferedReader = new BufferedReader(inputStreamReader);
-				
+
 				String line;
 				while((line = bufferedReader.readLine()) != null){
-					String[] valoriRand = line.split(" ");
-					listaChei.add(Integer.parseInt(valoriRand[1]));
+					String[] valoriRand = line.split(",");
+					listaChei.add(Integer.parseInt(valoriRand[0]));
 				}
-				
-				} catch (IOException e) {
-					e.printStackTrace();
-				} finally{
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally{
 				if(bufferedReader != null)
 					try {
 						bufferedReader.close();
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
-				}
-			
-			for(Integer cheie : listaChei) {
-				System.out.println("In dictionar exista cheia cu numarul " + cheie);
 			}
-			
+
+			if(listaChei.size()>0){
+                System.out.print("Dictionarul contine urmatoarele chei:");
+                for(Integer cheie : listaChei) {
+                    System.out.print(" " + cheie);
+                }
+				System.out.println();
+            }else {
+                System.out.println("Dictionarul este gol!");
+            }
+
 			try (Scanner scanner = new Scanner(System.in)) {
 				while (true) {
 					String command = scanner.nextLine();
@@ -62,8 +68,8 @@ public class Program {
 						writer.println(command.strip());
 						writer.flush();
 						String response = reader.readLine();
-						System.out.println(response);											
-					} 
+						System.out.println(response);
+					}
 				}
 			}
 		} catch (Exception e) {
@@ -75,4 +81,3 @@ public class Program {
 	}
 
 }
-
